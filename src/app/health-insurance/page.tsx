@@ -404,7 +404,7 @@ export default function HealthInsurancePage() {
 
                 <div className="mt-8">
                       <button
-                        onClick={() => handleBuyPlan(activePlanDetails.name, activePlanDetails.premium, activePlanDetails.vat, activePlanDetails.total)}
+                        onClick={() => handleBuyPlan(activePlanDetails.name, activePlanDetails.premium)}
                         className="w-full text-center text-xs font-bold bg-brand-green hover:bg-brand-green-hover text-white py-3.5 px-4 rounded-xl shadow-lg shadow-brand-green/10 hover:scale-[1.01] transition-all duration-300 cursor-pointer"
                       >
                         Buy {activePlanDetails.name} Online
