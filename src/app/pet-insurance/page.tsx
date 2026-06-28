@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CheckoutModal from "@/components/CheckoutModal";
 import {
   Dog,
   Cat,
@@ -33,10 +34,6 @@ export default function PetInsurancePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlanName, setSelectedPlanName] = useState("");
   const [selectedPlanPrice, setSelectedPlanPrice] = useState(0);
-  const [petFormName, setPetFormName] = useState("");
-  const [petFormBreed, setPetFormBreed] = useState("");
-  const [petFormAge, setPetFormAge] = useState("1");
-  const [checkoutComplete, setCheckoutComplete] = useState(false);
 
   interface PetPlan {
     name: string;
@@ -251,13 +248,7 @@ export default function PetInsurancePage() {
   const handleBuyPlan = (planName: string, price: number) => {
     setSelectedPlanName(planName);
     setSelectedPlanPrice(price);
-    setCheckoutComplete(false);
     setIsModalOpen(true);
-  };
-
-  const handleCheckoutSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCheckoutComplete(true);
   };
 
   return (
@@ -445,7 +436,7 @@ export default function PetInsurancePage() {
                     </div>
                     
                     <button
-                      onClick={() => handleBuyPlan(`${petType === "cat" ? "Cat" : "Dog"} - ${plan.name}`, plan.premium)}
+                      onClick={() => handleBuyPlan(plan.name, plan.premium)}
                       className={`w-full text-center text-xs font-bold py-3.5 px-4 rounded-xl transition-all duration-300 hover:scale-[1.01] cursor-pointer ${
                         plan.name === "Plan B"
                           ? "bg-brand-green text-white hover:bg-brand-green-hover shadow-md shadow-brand-green/20"
@@ -467,7 +458,7 @@ export default function PetInsurancePage() {
               </p>
               <p className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-brand-green flex-shrink-0" />
-                <span>The policy will cease after availing the full Sum Insured/ Defined Coverage.</span>
+                <span>The policy will cease after availing the full Maximum Coverage Limit (Sum Insured).</span>
               </p>
               <p className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-brand-green flex-shrink-0" />
@@ -815,144 +806,12 @@ export default function PetInsurancePage() {
       </main>
 
       {/* Simulator Purchase Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-md w-full p-6 sm:p-8 relative">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {!checkoutComplete ? (
-              <form onSubmit={handleCheckoutSubmit} className="space-y-5">
-                <div className="text-center pb-4 border-b border-slate-100">
-                  <span className="text-[10px] font-bold text-brand-green tracking-widest uppercase">E-Checkout Simulator</span>
-                  <h3 className="font-display font-black text-xl text-brand-blue mt-1">
-                    Buy {selectedPlanName}
-                  </h3>
-                  <p className="text-[11px] text-slate-400 mt-0.5">
-                    Configure your pet details to complete mock purchase
-                  </p>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-xs font-bold text-slate-500 block mb-1.5">Pet Name</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Leo / Luna"
-                      value={petFormName}
-                      onChange={(e) => setPetFormName(e.target.value)}
-                      className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-hidden focus:border-brand-green"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-xs font-bold text-slate-500 block mb-1.5">Pet Age (Years)</label>
-                      <select
-                        value={petFormAge}
-                        onChange={(e) => setPetFormAge(e.target.value)}
-                        className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 bg-white focus:outline-hidden focus:border-brand-green"
-                      >
-                        <option value="0.5">6 Months - 1 Year</option>
-                        <option value="1">1 Year</option>
-                        <option value="2">2 Years</option>
-                        <option value="3">3 Years</option>
-                        <option value="4">4 Years</option>
-                        <option value="5">5 Years</option>
-                        <option value="6">6 Years</option>
-                        <option value="7">7 Years</option>
-                        <option value="8">8 Years</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-slate-500 block mb-1.5">Pet Breed</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Persian / Retriever"
-                        value={petFormBreed}
-                        onChange={(e) => setPetFormBreed(e.target.value)}
-                        className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-700 focus:outline-hidden focus:border-brand-green"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="p-3 bg-brand-light border border-slate-100 rounded-xl space-y-1">
-                    <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Premium Invoice</span>
-                    <div className="flex justify-between items-baseline text-xs text-brand-blue font-bold">
-                      <span>Annual Cost:</span>
-                      <span>BDT {selectedPlanPrice.toLocaleString()} / year</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4 flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setIsModalOpen(false)}
-                    className="flex-1 border border-slate-200 hover:bg-slate-50 text-xs font-bold text-slate-600 py-3 rounded-xl transition-all cursor-pointer"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 bg-brand-green hover:bg-brand-green-hover text-white text-xs font-bold py-3 rounded-xl transition-all shadow-md shadow-brand-green/10 hover:shadow-brand-green/35 cursor-pointer"
-                  >
-                    Confirm Purchase
-                  </button>
-                </div>
-              </form>
-            ) : (
-              <div className="text-center py-6 space-y-5">
-                <div className="w-14 h-14 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="font-display font-black text-xl text-brand-blue">
-                    Policy Issued Successfully!
-                  </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
-                    Congratulations! The policy cover for your pet <strong>{petFormName}</strong> has been simulation issued. E-Certificate has been emailed to you.
-                  </p>
-                </div>
-
-                <div className="p-4 bg-brand-light rounded-xl text-left border border-slate-100 space-y-2 text-[11px] text-slate-600">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Policy Holder Name:</span>
-                    <span className="font-bold text-slate-700">Client Portal User</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Insured Pet:</span>
-                    <span className="font-bold text-slate-700">{petFormName} ({petFormBreed})</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Policy limit:</span>
-                    <span className="font-bold text-slate-700">{selectedPlanName}</span>
-                  </div>
-                  <div className="flex justify-between font-semibold border-t border-slate-200/60 pt-2">
-                    <span className="text-slate-500">Premium Paid:</span>
-                    <span className="text-brand-green">BDT {selectedPlanPrice.toLocaleString()} (Paid)</span>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="w-full bg-brand-blue hover:bg-brand-blue-light text-white text-xs font-bold py-3.5 rounded-xl transition-all cursor-pointer"
-                >
-                  Close & View Dashboard
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <CheckoutModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        planName={`Pet Insurance ${selectedPlanName} (${petType === "cat" ? "Cat" : "Dog"} Plan)`}
+        premiumAmount={selectedPlanPrice}
+      />
 
       <Footer />
     </>

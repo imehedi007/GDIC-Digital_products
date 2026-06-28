@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CheckoutModal from "@/components/CheckoutModal";
 import {
   Globe,
   ShieldCheck,
@@ -78,24 +79,9 @@ export default function TravelInsurancePage() {
 
   // Simulation Modal States
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [fullName, setFullName] = useState("");
-  const [passportNumber, setPassportNumber] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [nomineeMobile, setNomineeMobile] = useState("");
-  const [checkoutComplete, setCheckoutComplete] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
 
   const handleBuyPolicy = () => {
-    setCheckoutComplete(false);
     setIsModalOpen(true);
-  };
-
-  const handleCheckoutSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (fullName && passportNumber && mobileNumber && nomineeMobile) {
-      setTransactionId(`GD-TRV-${Math.floor(100000 + Math.random() * 900000)}`);
-      setCheckoutComplete(true);
-    }
   };
 
   // Benefits
@@ -659,177 +645,12 @@ export default function TravelInsurancePage() {
       </main>
 
       {/* Checkout Simulator Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 p-4 animate-fade-in">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-lg w-full overflow-hidden relative">
-            
-            {/* Modal header */}
-            <div className="p-6 bg-brand-blue text-white flex items-center justify-between">
-              <div>
-                <h3 className="font-display font-bold text-base">E-Checkout Portal</h3>
-                <p className="text-[10px] text-slate-300 mt-0.5">Green Delta Travel Insurance Portal</p>
-              </div>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="p-1 hover:bg-white/10 rounded-lg text-slate-300 hover:text-white transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal body */}
-            <div className="p-6 space-y-6">
-              {!checkoutComplete ? (
-                <form onSubmit={handleCheckoutSubmit} className="space-y-4">
-                  
-                  {/* Selected Plan overview */}
-                  <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-between text-xs font-medium">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block font-bold uppercase">Travelling Countries:</span>
-                      <span className="font-bold text-brand-blue block max-w-[200px] leading-relaxed">
-                        {selectedCountries.join(", ")}
-                      </span>
-                      <span className="text-[9px] text-slate-450 block font-bold mt-0.5 lowercase italic">({planName})</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-[10px] text-slate-400 block font-bold uppercase">Total Premium:</span>
-                      <span className="font-black text-brand-green text-sm">BDT {grandTotal.toLocaleString()}</span>
-                    </div>
-                  </div>
-
-                  {/* Form inputs */}
-                  <div className="space-y-3">
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Traveller Full Name</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Imran Mehedi"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        className="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:border-brand-green font-medium"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Passport Number</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. EE0123456"
-                        value={passportNumber}
-                        onChange={(e) => setPassportNumber(e.target.value)}
-                        className="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:border-brand-green font-medium"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Registered Mobile</label>
-                        <input
-                          type="tel"
-                          required
-                          placeholder="e.g. 01711223344"
-                          value={mobileNumber}
-                          onChange={(e) => setMobileNumber(e.target.value)}
-                          className="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:border-brand-green font-medium"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nominee Mobile</label>
-                        <input
-                          type="tel"
-                          required
-                          placeholder="e.g. 01911223344"
-                          value={nomineeMobile}
-                          onChange={(e) => setNomineeMobile(e.target.value)}
-                          className="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:border-brand-green font-medium"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full text-center text-xs font-bold bg-brand-green hover:bg-brand-green-hover text-white py-3.5 px-4 rounded-xl shadow-md shadow-brand-green/20 transition-all duration-300 cursor-pointer mt-4"
-                  >
-                    Proceed to Simulated Payment
-                  </button>
-
-                </form>
-              ) : (
-                <div className="text-center py-6 space-y-6">
-                  
-                  {/* Verified badge */}
-                  <div className="w-16 h-16 bg-emerald-100 text-brand-green rounded-full flex items-center justify-center mx-auto shadow-md">
-                    <Check className="w-8 h-8 stroke-[3]" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-display font-black text-xl text-brand-blue">Simulated Purchase Successful!</h4>
-                    <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                      Thank you for choosing Green Delta. Your transaction has processed successfully. An email with policy documentation is on its way.
-                    </p>
-                  </div>
-
-                  {/* Mock Invoice details */}
-                  <div className="p-4 bg-slate-50 border border-slate-150 rounded-2xl text-left space-y-2.5 max-w-sm mx-auto text-xs">
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Transaction ID:</span>
-                      <span className="font-bold text-slate-800">{transactionId}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Traveller Name:</span>
-                      <span className="font-bold text-slate-800">{fullName}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Passport Number:</span>
-                      <span className="font-bold text-slate-800">{passportNumber}</span>
-                    </div>
-                    <div className="flex justify-between items-start">
-                      <span className="text-slate-400">Travelling Countries:</span>
-                      <span className="font-bold text-slate-800 text-right max-w-[180px]">{selectedCountries.join(", ")}</span>
-                    </div>
-                    <div className="flex justify-between items-start">
-                      <span className="text-slate-400">Plan Name:</span>
-                      <span className="font-bold text-brand-green text-[10px] text-right max-w-[180px] leading-relaxed">{planName}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Duration:</span>
-                      <span className="font-bold text-slate-800">{duration} Days</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Traveller Age:</span>
-                      <span className="font-bold text-slate-800">{age} Years</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Base Net Premium:</span>
-                      <span className="font-bold text-slate-800">BDT {netPremium.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">VAT (15%):</span>
-                      <span className="font-bold text-slate-800">BDT {vat.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between pt-1.5 border-t border-slate-200">
-                      <span className="text-slate-500 font-bold">Amount Paid:</span>
-                      <span className="font-bold text-brand-green">BDT {grandTotal.toLocaleString()}</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      onClick={() => setIsModalOpen(false)}
-                      className="bg-brand-blue hover:bg-brand-blue-light text-white text-xs font-bold py-3.5 px-6 rounded-xl transition-all duration-300 cursor-pointer"
-                    >
-                      Close Checkout
-                    </button>
-                  </div>
-
-                </div>
-              )}
-            </div>
-
-          </div>
-        </div>
-      )}
+      <CheckoutModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        planName={`Overseas Mediclaim (${planName} - ${selectedCountries.join(", ")})`}
+        premiumAmount={netPremium}
+      />
 
       <Footer />
     </div>

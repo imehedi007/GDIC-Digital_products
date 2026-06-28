@@ -62,7 +62,7 @@ export default function Navbar() {
                     <span>•</span>
                     <Link href="/travel-insurance" className="hover:text-brand-green font-semibold">Travel</Link>
                     <span>•</span>
-                    <Link href="#motor" className="hover:text-brand-green">Motor</Link>
+                    <Link href="/motor-insurance" className="hover:text-brand-green font-semibold">Motor</Link>
                   </div>
                 </div>
                 <div className="p-3 hover:bg-brand-light rounded-xl transition-colors">
@@ -88,8 +88,8 @@ export default function Navbar() {
             <Link href="#about" className="text-sm font-semibold text-slate-700 hover:text-brand-blue transition-colors">
               About Us
             </Link>
-            <div className="flex items-center gap-1.5 px-3 py-1 bg-brand-green/10 text-brand-green rounded-full text-xs font-bold animate-pulse-slow">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-brand-green" />
               <span>Digital Services</span>
             </div>
           </nav>
@@ -102,14 +102,14 @@ export default function Navbar() {
             </Link>
             <Link
               href="#portal"
-              className="flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:text-brand-green transition-colors border border-slate-200 hover:border-brand-green/30 px-4 py-2 rounded-xl transition-all duration-300"
+              className="whitespace-nowrap flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:text-brand-green border border-slate-200 hover:border-brand-green/30 px-4 py-2 rounded-xl transition-all duration-300"
             >
               <User className="w-4 h-4" />
               <span>Customer Portal</span>
             </Link>
             <Link
               href="#calculator"
-              className="relative text-sm font-semibold text-white bg-brand-green hover:bg-brand-green-hover px-5 py-2.5 rounded-xl shadow-md shadow-brand-green/20 hover:shadow-lg hover:shadow-brand-green/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+              className="whitespace-nowrap relative text-sm font-semibold text-white bg-brand-green hover:bg-brand-green-hover px-5 py-2.5 rounded-xl shadow-md shadow-brand-green/20 hover:shadow-lg hover:shadow-brand-green/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
             >
               Get a Quote
             </Link>
@@ -167,6 +167,13 @@ export default function Navbar() {
             className="block px-3 py-2 rounded-xl text-base font-semibold text-brand-green hover:bg-slate-50"
           >
             Travel Insurance ✈️
+          </Link>
+          <Link
+            href="/motor-insurance"
+            onClick={() => setIsOpen(false)}
+            className="block px-3 py-2 rounded-xl text-base font-semibold text-brand-green hover:bg-slate-50"
+          >
+            Motor Insurance 🚗
           </Link>
           <Link
             href="#corporate"

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CheckoutModal from "@/components/CheckoutModal";
 import {
   Venus,
   ShieldCheck,
@@ -23,12 +24,6 @@ export default function NibeditaInsurancePage() {
 
   // Simulation Modal States
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [fullName, setFullName] = useState("");
-  const [nidNumber, setNidNumber] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [nomineeMobile, setNomineeMobile] = useState("");
-  const [checkoutComplete, setCheckoutComplete] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
 
   // Premium Calculations based on Selected Sum Insured
   const netPremium = Math.round(sumInsured * 0.005);
@@ -41,16 +36,7 @@ export default function NibeditaInsurancePage() {
   };
 
   const handleBuyPolicy = () => {
-    setCheckoutComplete(false);
     setIsModalOpen(true);
-  };
-
-  const handleCheckoutSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (fullName && nidNumber && mobileNumber && nomineeMobile) {
-      setTransactionId(`GD-NIB-${Math.floor(100000 + Math.random() * 900000)}`);
-      setCheckoutComplete(true);
-    }
   };
 
   // Compensation Schedule Data
@@ -219,7 +205,7 @@ export default function NibeditaInsurancePage() {
                 <span className="gradient-text-blue-green font-extrabold">Slider Estimator</span>
               </h2>
               <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
-                Drag the slider to adjust your desired Capital Sum Insured. Rates are set at 0.50% per annum.
+                Drag the slider to adjust your desired Maximum Coverage Limit (Sum Insured). Rates are set at 0.50% per annum.
               </p>
             </div>
 
@@ -258,7 +244,7 @@ export default function NibeditaInsurancePage() {
                       </div>
                       
                       <div className="space-y-1">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Sum Insured Limit</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">Maximum Coverage Limit</span>
                         <span className="text-2xl font-black text-brand-blue">BDT {pkg.coverage.toLocaleString()}</span>
                       </div>
 
@@ -303,7 +289,7 @@ export default function NibeditaInsurancePage() {
               <div className="lg:col-span-7 p-8 bg-slate-50 rounded-3xl border border-slate-100 space-y-8">
                 <div className="space-y-2">
                   <div className="flex justify-between items-baseline">
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Choose Sum Insured</span>
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Choose Maximum Coverage Limit (Sum Insured)</span>
                     <div>
                       <span className="text-2xl font-black text-brand-blue">BDT {sumInsured.toLocaleString()}</span>
                     </div>
@@ -618,162 +604,12 @@ export default function NibeditaInsurancePage() {
       </main>
 
       {/* Checkout Simulator Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 p-4 animate-fade-in">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-lg w-full overflow-hidden relative">
-            
-            {/* Modal header */}
-            <div className="p-6 bg-brand-blue text-white flex items-center justify-between">
-              <div>
-                <h3 className="font-display font-bold text-base">E-Checkout Portal</h3>
-                <p className="text-[10px] text-slate-300 mt-0.5">Green Delta Nibedita Protection Portal</p>
-              </div>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="p-1 hover:bg-white/10 rounded-lg text-slate-300 hover:text-white transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal body */}
-            <div className="p-6 space-y-6">
-              {!checkoutComplete ? (
-                <form onSubmit={handleCheckoutSubmit} className="space-y-4">
-                  
-                  {/* Selected Plan overview */}
-                  <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-between text-xs">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block font-bold uppercase">Selected Sum Insured:</span>
-                      <span className="font-bold text-brand-blue text-sm">BDT {sumInsured.toLocaleString()}</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-[10px] text-slate-400 block font-bold uppercase">Annual Premium:</span>
-                      <span className="font-black text-brand-green text-sm">BDT {grandTotal.toLocaleString()}</span>
-                    </div>
-                  </div>
-
-                  {/* Form inputs */}
-                  <div className="space-y-3">
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Insured Full Name</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Tanzila Rahman"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        className="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:border-brand-green font-medium"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">NID Card Number</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. 19952615602500000"
-                        value={nidNumber}
-                        onChange={(e) => setNidNumber(e.target.value)}
-                        className="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:border-brand-green font-medium"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Registered Mobile</label>
-                        <input
-                          type="tel"
-                          required
-                          placeholder="e.g. 01711223344"
-                          value={mobileNumber}
-                          onChange={(e) => setMobileNumber(e.target.value)}
-                          className="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:border-brand-green font-medium"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Nominee Mobile</label>
-                        <input
-                          type="tel"
-                          required
-                          placeholder="e.g. 01911223344"
-                          value={nomineeMobile}
-                          onChange={(e) => setNomineeMobile(e.target.value)}
-                          className="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:border-brand-green font-medium"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full text-center text-xs font-bold bg-brand-green hover:bg-brand-green-hover text-white py-3.5 px-4 rounded-xl shadow-md shadow-brand-green/20 transition-all duration-300 cursor-pointer mt-4"
-                  >
-                    Proceed to Simulated Payment
-                  </button>
-
-                </form>
-              ) : (
-                <div className="text-center py-6 space-y-6">
-                  
-                  {/* Verified badge */}
-                  <div className="w-16 h-16 bg-emerald-100 text-brand-green rounded-full flex items-center justify-center mx-auto shadow-md">
-                    <Check className="w-8 h-8 stroke-[3]" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-display font-black text-xl text-brand-blue">Simulated Purchase Successful!</h4>
-                    <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                      Thank you for choosing Green Delta. Your transaction has processed successfully. An email with policy documentation is on its way.
-                    </p>
-                  </div>
-
-                  {/* Mock Invoice details */}
-                  <div className="p-4 bg-slate-50 border border-slate-150 rounded-2xl text-left space-y-2.5 max-w-sm mx-auto text-xs">
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Transaction ID:</span>
-                      <span className="font-bold text-slate-800">{transactionId}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Policyholder Name:</span>
-                      <span className="font-bold text-slate-800">{fullName}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Policy Capital Sum Insured:</span>
-                      <span className="font-bold text-slate-800">BDT {sumInsured.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Base Net Premium:</span>
-                      <span className="font-bold text-slate-800">BDT {netPremium.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">VAT (15%):</span>
-                      <span className="font-bold text-slate-800">BDT {vat.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Stamp Fee:</span>
-                      <span className="font-bold text-slate-800">BDT {stamp.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between pt-1.5 border-t border-slate-200">
-                      <span className="text-slate-500 font-bold">Amount Paid:</span>
-                      <span className="font-bold text-brand-green">BDT {grandTotal.toLocaleString()}</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      onClick={() => setIsModalOpen(false)}
-                      className="bg-brand-blue hover:bg-brand-blue-light text-white text-xs font-bold py-3.5 px-6 rounded-xl transition-all duration-300 cursor-pointer"
-                    >
-                      Close Checkout
-                    </button>
-                  </div>
-
-                </div>
-              )}
-            </div>
-
-          </div>
-        </div>
-      )}
+      <CheckoutModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        planName="Nibedita Protection Plan"
+        premiumAmount={netPremium + stamp}
+      />
 
       <Footer />
     </div>

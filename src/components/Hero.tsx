@@ -21,6 +21,8 @@ export default function Hero() {
         router.push("/ppa-insurance");
       } else if (selectedProduct === "overseas") {
         router.push("/travel-insurance");
+      } else if (selectedProduct === "motor") {
+        router.push("/motor-insurance");
       } else {
         const targetElement = document.getElementById(selectedProduct);
         if (targetElement) {

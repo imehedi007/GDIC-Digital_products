@@ -242,12 +242,14 @@ export default function ServiceCard() {
                           ? "/ppa-insurance"
                           : item.id === "overseas"
                           ? "/travel-insurance"
+                          : item.id === "motor"
+                          ? "/motor-insurance"
                           : "#calculator"
                       }
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-green hover:text-white transition-colors group/btn pt-2 cursor-pointer"
                     >
                       <span>
-                        {(item.id === "pet" || item.id === "health" || item.id === "nibedita" || item.id === "ppa" || item.id === "overseas")
+                        {(item.id === "pet" || item.id === "health" || item.id === "nibedita" || item.id === "ppa" || item.id === "overseas" || item.id === "motor")
                           ? "View Details & Plans"
                           : "Estimate Premium"}
                       </span>
