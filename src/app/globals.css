@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue-dark: #0b1c30;
+  --color-brand-blue: #0f2942;
+  --color-brand-blue-light: #1b3d61;
+  --color-brand-green: #00a859;
+  --color-brand-green-hover: #008c4a;
+  --color-brand-accent: #10b981;
+  --color-brand-light: #f4f7fa;
+  
+  --font-display: var(--font-outfit), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+:root {
+  --background: #fcfdfe;
+  --foreground: #0f172a;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Glassmorphism utilities */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15, 41, 66, 0.05);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(15, 41, 66, 0.04);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 168, 89, 0.2);
+  box-shadow: 0 10px 40px rgba(15, 41, 66, 0.06);
+  transform: translateY(-4px);
+}
+
+/* Custom Gradients */
+.gradient-text-blue-green {
+  background: linear-gradient(135deg, #0f2942 30%, #00a859 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-bg-hero {
+  background: radial-gradient(circle at 10% 20%, rgba(0, 168, 89, 0.03) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(15, 41, 66, 0.04) 0%, transparent 50%);
+}
+
+.gradient-green-glow {
+  background: radial-gradient(circle, rgba(0, 168, 89, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.gradient-blue-glow {
+  background: radial-gradient(circle, rgba(15, 41, 66, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+}
