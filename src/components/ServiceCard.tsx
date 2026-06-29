@@ -28,6 +28,13 @@ export default function ServiceCard() {
       illustration: (
         <div className="relative w-full h-full flex items-center justify-center bg-linear-to-tr from-sky-50 to-blue-50/50">
           <div className="absolute top-6 right-6 w-16 h-16 bg-white/60 rounded-full blur-md" />
+          <div className="absolute top-4 right-4 bg-white/85 backdrop-blur-md border border-sky-500/10 rounded-2xl px-3.5 py-2 shadow-xs flex items-center gap-2.5 z-10 hover:scale-105 transition-transform duration-300">
+            <div className="w-1 h-6 bg-blue-500 rounded-full" />
+            <div className="flex flex-col items-start">
+              <span className="text-[8px] uppercase tracking-widest text-slate-400 font-bold leading-none">Starting at</span>
+              <span className="text-xs font-extrabold text-slate-800 leading-tight mt-0.5">BDT 500</span>
+            </div>
+          </div>
           <svg viewBox="0 0 200 150" fill="none" className="w-40 h-32 text-blue-500" xmlns="http://www.w3.org/2000/svg">
             <rect x="30" y="40" width="140" height="90" rx="16" fill="white" className="shadow-xs" />
             <circle cx="70" cy="85" r="25" fill="#e0f2fe" />
@@ -55,6 +62,13 @@ export default function ServiceCard() {
       illustration: (
         <div className="relative w-full h-full flex items-center justify-center bg-linear-to-tr from-emerald-50 to-teal-50/50">
           <div className="absolute bottom-6 left-6 w-20 h-20 bg-white/60 rounded-full blur-md" />
+          <div className="absolute top-4 right-4 bg-white/85 backdrop-blur-md border border-emerald-500/10 rounded-2xl px-3.5 py-2 shadow-xs flex items-center gap-2.5 z-10 hover:scale-105 transition-transform duration-300">
+            <div className="w-1 h-6 bg-emerald-500 rounded-full" />
+            <div className="flex flex-col items-start">
+              <span className="text-[8px] uppercase tracking-widest text-slate-400 font-bold leading-none">Starting at</span>
+              <span className="text-xs font-extrabold text-slate-800 leading-tight mt-0.5">BDT 204</span>
+            </div>
+          </div>
           <svg viewBox="0 0 200 150" fill="none" className="w-40 h-32 text-emerald-500" xmlns="http://www.w3.org/2000/svg">
             <rect x="30" y="40" width="140" height="90" rx="16" fill="white" />
             <circle cx="130" cy="85" r="25" fill="#d1fae5" />
@@ -79,6 +93,13 @@ export default function ServiceCard() {
       illustration: (
         <div className="relative w-full h-full flex items-center justify-center bg-linear-to-tr from-pink-50 to-purple-50/50">
           <div className="absolute top-8 left-8 w-16 h-16 bg-white/60 rounded-full blur-md" />
+          <div className="absolute top-4 right-4 bg-white/85 backdrop-blur-md border border-pink-500/10 rounded-2xl px-3.5 py-2 shadow-xs flex items-center gap-2.5 z-10 hover:scale-105 transition-transform duration-300">
+            <div className="w-1 h-6 bg-pink-500 rounded-full" />
+            <div className="flex flex-col items-start">
+              <span className="text-[8px] uppercase tracking-widest text-slate-400 font-bold leading-none">Starting at</span>
+              <span className="text-xs font-extrabold text-slate-800 leading-tight mt-0.5">BDT 500</span>
+            </div>
+          </div>
           <svg viewBox="0 0 200 150" fill="none" className="w-40 h-32 text-purple-500" xmlns="http://www.w3.org/2000/svg">
             <rect x="30" y="40" width="140" height="90" rx="16" fill="white" />
             <circle cx="70" cy="85" r="22" fill="#f3e8ff" />
@@ -104,6 +125,13 @@ export default function ServiceCard() {
       illustration: (
         <div className="relative w-full h-full flex items-center justify-center bg-linear-to-tr from-amber-50 to-orange-50/50">
           <div className="absolute bottom-6 right-6 w-16 h-16 bg-white/60 rounded-full blur-md" />
+          <div className="absolute top-4 right-4 bg-white/85 backdrop-blur-md border border-amber-500/10 rounded-2xl px-3.5 py-2 shadow-xs flex items-center gap-2.5 z-10 hover:scale-105 transition-transform duration-300">
+            <div className="w-1 h-6 bg-amber-500 rounded-full" />
+            <div className="flex flex-col items-start">
+              <span className="text-[8px] uppercase tracking-widest text-slate-400 font-bold leading-none">Starting at</span>
+              <span className="text-xs font-extrabold text-slate-800 leading-tight mt-0.5">BDT 60</span>
+            </div>
+          </div>
           <svg viewBox="0 0 200 150" fill="none" className="w-40 h-32 text-amber-500" xmlns="http://www.w3.org/2000/svg">
             <rect x="30" y="40" width="140" height="90" rx="16" fill="white" />
             <circle cx="130" cy="85" r="22" fill="#fef3c7" />
@@ -129,6 +157,13 @@ export default function ServiceCard() {
       illustration: (
         <div className="relative w-full h-full flex items-center justify-center bg-linear-to-tr from-indigo-50 to-violet-50/50">
           <div className="absolute top-6 left-6 w-16 h-16 bg-white/60 rounded-full blur-md" />
+          <div className="absolute top-4 right-4 bg-white/85 backdrop-blur-md border border-indigo-500/10 rounded-2xl px-3.5 py-2 shadow-xs flex items-center gap-2.5 z-10 hover:scale-105 transition-transform duration-300">
+            <div className="w-1 h-6 bg-indigo-500 rounded-full" />
+            <div className="flex flex-col items-start">
+              <span className="text-[8px] uppercase tracking-widest text-slate-400 font-bold leading-none">Starting at</span>
+              <span className="text-xs font-extrabold text-slate-800 leading-tight mt-0.5">BDT 350</span>
+            </div>
+          </div>
           <svg viewBox="0 0 200 150" fill="none" className="w-40 h-32 text-indigo-500" xmlns="http://www.w3.org/2000/svg">
             <rect x="30" y="40" width="140" height="90" rx="16" fill="white" />
             <circle cx="70" cy="85" r="22" fill="#e0e7ff" />
@@ -153,6 +188,13 @@ export default function ServiceCard() {
       illustration: (
         <div className="relative w-full h-full flex items-center justify-center bg-linear-to-tr from-rose-50 to-red-50/50">
           <div className="absolute bottom-6 left-6 w-18 h-18 bg-white/60 rounded-full blur-md" />
+          <div className="absolute top-4 right-4 bg-white/85 backdrop-blur-md border border-rose-500/10 rounded-2xl px-3.5 py-2 shadow-xs flex items-center gap-2.5 z-10 hover:scale-105 transition-transform duration-300">
+            <div className="w-1 h-6 bg-rose-500 rounded-full" />
+            <div className="flex flex-col items-start">
+              <span className="text-[8px] uppercase tracking-widest text-slate-400 font-bold leading-none">Starting at</span>
+              <span className="text-xs font-extrabold text-slate-800 leading-tight mt-0.5">BDT 1,000</span>
+            </div>
+          </div>
           <svg viewBox="0 0 200 150" fill="none" className="w-40 h-32 text-rose-500" xmlns="http://www.w3.org/2000/svg">
             <rect x="30" y="40" width="140" height="90" rx="16" fill="white" />
             <circle cx="130" cy="85" r="22" fill="#ffe4e6" />
